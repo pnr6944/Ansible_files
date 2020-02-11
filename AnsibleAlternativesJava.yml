@@ -1,0 +1,18 @@
+---
+ - name: Java_Alternatives 
+   hosts: all
+   become: true
+   tasks:
+     - name: Java_Install_on_1.8
+       yum:
+         name: java-1.8.0-openjdk-devel
+         state: present
+     - name: Java_Install_on_1.7
+       yum:
+         name: java-1.7.0-openjdk-devel
+         state: present
+     - name: Correct java version selected
+       alternatives:
+         link: /usr/bin/java
+         name: java-1.7.0-openjdk-devel
+         path: /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.241-2.6.20.0.amzn2.0.2.x86_64/jre/bin/java
